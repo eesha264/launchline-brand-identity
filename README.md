@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Welcome to your Lovable project
 
 ## Project info
@@ -51,6 +52,41 @@ npm run dev
 - Edit files directly within the Codespace and commit and push your changes once you're done.
 
 ## What technologies are used for this project?
+=======
+# Launchline — Web Design & Development Agency
+
+**URL**: https://launchline.dev
+
+## Project info
+
+From idea to launch — faster. Launchline builds high-performance, SEO-ready business websites that convert.
+
+## Getting Started
+
+To work locally, you can clone this repo and push changes.
+
+### Prerequisites
+
+- Node.js & npm installed
+
+### Installation
+
+```sh
+# Step 1: Clone the repository
+git clone <YOUR_GIT_URL>
+
+# Step 2: Navigate to the project directory
+cd <YOUR_PROJECT_NAME>
+
+# Step 3: Install the necessary dependencies
+npm i
+
+# Step 4: Start the development server
+npm run dev
+```
+
+## Technologies
+>>>>>>> 00913aa (removed few tags)
 
 This project is built with:
 
@@ -59,6 +95,7 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+<<<<<<< HEAD
 
 ## How can I deploy this project?
 
@@ -71,3 +108,5 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+=======
+>>>>>>> 00913aa (removed few tags)
