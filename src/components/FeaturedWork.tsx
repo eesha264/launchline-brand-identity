@@ -1,4 +1,4 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 
@@ -7,72 +7,129 @@ const projects = [
     title: "Vantage Finance",
     category: "Fintech Landing Page",
     description: "A high-converting landing page for a modern fintech startup focused on personal investing.",
-    color: "from-primary/10 to-primary/5",
+    color: "#8B5CF6", // Violet
   },
   {
     title: "Meridian Health",
     category: "Healthcare Platform",
     description: "Clean, trust-building web presence for a digital health platform serving thousands of patients.",
-    color: "from-primary/8 to-primary/3",
+    color: "#06b6d4", // Cyan
   },
   {
     title: "Bolt Studio",
     category: "Creative Agency",
     description: "Bold portfolio website for a design studio showcasing their work with dynamic interactions.",
-    color: "from-primary/12 to-primary/5",
+    color: "#ec4899", // Pink
   },
+  {
+    title: "Nexus Tech",
+    category: "SaaS Dashboard",
+    description: "Comprehensive data visualization dashboard for enterprise analytics.",
+    color: "#10b981", // Emerald
+  }
 ];
 
 const FeaturedWork = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
 
   return (
-    <section id="work" ref={ref} className="section-padding bg-muted/30 relative">
-      <div className="container mx-auto">
+    <section id="work" ref={containerRef} className="relative min-h-[125vh] bg-muted/5">
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
+
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          style={{ opacity: useTransform(scrollYProgress, [0, 0.1], [1, 0]) }}
+          className="absolute top-24 md:top-32 text-center z-20 pointer-events-none"
         >
           <span className="text-sm font-medium text-primary tracking-widest uppercase mb-4 block">Work</span>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
             Featured <span className="text-primary">projects</span>.
           </h2>
+          <p className="mt-4 text-muted-foreground">Scroll to explore</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {projects.map((project, i) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group cursor-pointer"
-            >
-              <div className="glass-card rounded-2xl overflow-hidden hover:glow-accent transition-all duration-500 hover:-translate-y-1">
-                {/* Project thumbnail placeholder */}
-                <div className={`aspect-[4/3] bg-gradient-to-br ${project.color} relative overflow-hidden`}>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-3/4 h-3/4 rounded-lg border border-primary/20 bg-card/50 backdrop-blur-sm flex items-center justify-center">
-                      <span className="font-display text-lg font-bold text-primary/40">{project.title}</span>
+        {/* Card Container */}
+        <div className="relative w-full max-w-[320px] md:max-w-[450px] aspect-[4/5] flex items-center justify-center mt-20 md:mt-0">
+          {projects.map((project, i) => {
+            // Center index for symmetrical spread
+            const centerIndex = (projects.length - 1) / 2;
+            const offset = i - centerIndex;
+
+            // Dynamic transforms based on scroll
+            // Animation completes at 0.8 scroll progress to leave some dwell time
+            const rotate = useTransform(
+              scrollYProgress,
+              [0, 1],
+              [0, offset * 12] // Reduced rotation slightly for tighter look
+            );
+
+            const x = useTransform(
+              scrollYProgress,
+              [0, 1],
+              [0, offset * 200] // Reduced horizontal spread slightly
+            );
+
+            const y = useTransform(
+              scrollYProgress,
+              [0, 1],
+              [0, Math.abs(offset) * 30] // Arch effect
+            );
+
+            // Stacking Scale: start piled up, end uniform
+            const scale = useTransform(scrollYProgress, [0, 1], [1 - (projects.length - 1 - i) * 0.05, 1]);
+
+            return (
+              <motion.div
+                key={project.title}
+                style={{
+                  rotate,
+                  x,
+                  y,
+                  scale,
+                  zIndex: i
+                }}
+                className="absolute w-full h-full origin-bottom"
+              >
+                <div
+                  className="w-full h-full rounded-3xl border border-white/10 bg-black/90 backdrop-blur-xl overflow-hidden flex flex-col relative group transition-all duration-500"
+                  style={{
+                    boxShadow: `0 0 40px -10px ${project.color}50`, // Stronger neon glow
+                    borderTop: `1px solid ${project.color}80`
+                  }}
+                >
+                  {/* Neon numbering */}
+                  <div className="absolute top-6 right-8 font-display text-5xl md:text-7xl font-bold opacity-20 select-none" style={{ color: project.color }}>
+                    0{i + 1}
+                  </div>
+
+                  {/* Content */}
+                  <div className="mt-auto p-8 md:p-10 bg-gradient-to-t from-black via-black/90 to-transparent">
+                    <span className="text-xs font-bold tracking-widest uppercase mb-3 block opacity-80" style={{ color: project.color }}>
+                      {project.category}
+                    </span>
+                    <h3 className="font-display text-3xl md:text-4xl font-bold text-white mb-3 leading-tight transition-colors group-hover:text-white/90">{project.title}</h3>
+                    <p className="text-white/60 text-sm md:text-base line-clamp-2 md:line-clamp-none mb-6">{project.description}</p>
+
+                    <div className="flex justify-end">
+                      <div className="w-12 h-12 rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110 cursor-pointer bg-white text-black hover:rotate-45" style={{ backgroundColor: project.color }}>
+                        <ArrowUpRight className="text-black" size={24} />
+                      </div>
                     </div>
                   </div>
-                  {/* Hover arrow */}
-                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-card/80 backdrop-blur flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                    <ArrowUpRight size={18} className="text-primary" />
-                  </div>
-                </div>
 
-                <div className="p-6">
-                  <span className="text-xs font-medium text-primary tracking-widest uppercase">{project.category}</span>
-                  <h3 className="font-display text-lg font-bold mt-1 mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
+                  {/* Glow effect on hover */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none mix-blend-screen"
+                    style={{
+                      background: `radial-gradient(circle at center, ${project.color}30, transparent 70%)`
+                    }}
+                  />
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

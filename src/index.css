@@ -89,7 +89,7 @@
     --launch-line-glow: 186 100% 60%;
     --surface-glass: 240 10% 6%;
     --surface-elevated: 240 10% 8%;
-    
+
     --sidebar-background: 240 10% 4%;
     --sidebar-foreground: 240 5% 96%;
     --sidebar-primary: 186 100% 50%;
@@ -110,14 +110,20 @@
     @apply bg-background text-foreground font-body antialiased selection:bg-primary/30 selection:text-primary-foreground;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display tracking-tight;
   }
 }
 
 @layer components {
   .launch-line {
-    @apply h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-80 shadow-[0_0_10px_rgba(var(--launch-line),0.5)];
+    @apply h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-80;
+    box-shadow: 0 0 10px rgba(var(--launch-line), 0.5);
   }
 
   .launch-line-vertical {
@@ -127,7 +133,7 @@
   .glass-card {
     @apply bg-card/40 backdrop-blur-xl border border-white/5 shadow-2xl;
   }
-  
+
   .glass-card:hover {
     @apply border-white/10 bg-card/60 transition-all duration-300;
   }
@@ -139,7 +145,7 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-white/70;
   }
-  
+
   .text-gradient-primary {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary/60;
   }
@@ -147,9 +153,13 @@
   .section-padding {
     @apply py-24 md:py-32 px-6 md:px-12;
   }
-  
+
   .hover-glow {
-    @apply transition-all duration-300 hover:shadow-[0_0_20px_rgba(var(--primary),0.3)];
+    @apply transition-all duration-300;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 20px rgba(var(--primary), 0.3);
   }
 
 }
@@ -160,16 +170,47 @@
   }
 
   @keyframes draw-line {
-    from { width: 0; }
-    to { width: 100%; }
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 100%;
+    }
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-8px);
+    }
   }
 
   .animate-float {
     animation: float 4s ease-in-out infinite;
+  }
+}
+
+@layer base {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.3);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.5);
   }
 }

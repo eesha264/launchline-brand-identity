@@ -1,73 +1,81 @@
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Clock, Eye, Award, BarChart3 } from "lucide-react";
+import { motion } from "framer-motion";
+import { Clock, Eye, Award, BarChart3, Rocket, Shield, Users, Zap } from "lucide-react";
 
 const reasons = [
-  { icon: Clock, title: "Speed", description: "Launch-ready in weeks, not months. No wasted time." },
-  { icon: Eye, title: "Clarity", description: "No jargon. Transparent process from brief to go-live." },
-  { icon: Award, title: "Quality", description: "Production-grade code. Every project built to last." },
-  { icon: BarChart3, title: "Results", description: "Designed to convert. Measured by real business impact." },
+  { icon: Clock, title: "Speed", description: "Launch-ready in weeks, not months." },
+  { icon: Eye, title: "Clarity", description: "Transparent process, no jargon." },
+  { icon: Award, title: "Quality", description: "Production-grade, scalable code." },
+  { icon: BarChart3, title: "Results", description: "Designed for high conversion." },
+  // Extended list for better marquee length
+  { icon: Rocket, title: "Growth", description: "Built to scale with your business." },
+  { icon: Shield, title: "Secure", description: "Enterprise-grade security standards." },
+  { icon: Users, title: "Support", description: "Dedicated post-launch support." },
+  { icon: Zap, title: "Performance", description: "Blazing fast load times." },
 ];
 
 const WhyLaunchline = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-
   return (
-    <section id="why" ref={ref} className="section-padding relative">
-      <div className="container mx-auto">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <span className="text-sm font-medium text-primary tracking-widest uppercase mb-4 block">Why Launchline</span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-              Built for <span className="text-primary">execution</span>.
-            </h2>
-          </motion.div>
+    <section id="why" className="section-padding relative overflow-hidden bg-background">
+      <div className="container mx-auto mb-12">
+        <div className="text-center max-w-3xl mx-auto">
+          <span className="text-sm font-medium text-primary tracking-widest uppercase mb-4 block">Why Launchline</span>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+            Built for <span className="text-primary">execution</span>.
+          </h2>
+        </div>
+      </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {reasons.map((reason, i) => (
-              <motion.div
-                key={reason.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="text-center group"
+      {/* Marquee Container */}
+      <div className="relative w-full py-10">
+        {/* Gradient Masks for smooth fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 md:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+
+        <div className="flex overflow-hidden">
+          {/* Animated Track - Duplicated for seamless loop */}
+          <motion.div
+            className="flex gap-8 px-4"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              repeat: Infinity,
+              ease: "linear",
+              duration: 30, // Adjust speed here
+            }}
+            style={{ width: "max-content" }}
+          >
+            {/* Original + Duplicate set for seamless loop logic */}
+            {[...reasons, ...reasons].map((reason, i) => (
+              <div
+                key={i}
+                className="flex-shrink-0 w-[280px] md:w-[350px] p-8 rounded-2xl border border-white/5 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors duration-300 group"
               >
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors duration-300">
-                  <reason.icon size={26} className="text-primary" />
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors duration-300">
+                  <reason.icon size={24} className="text-primary" />
                 </div>
-                <h3 className="font-display text-lg font-bold mb-2">{reason.title}</h3>
+                <h3 className="font-display text-xl font-bold mb-3">{reason.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{reason.description}</p>
-              </motion.div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Stats bar */}
+      <div className="container mx-auto mt-16 max-w-5xl">
+        <div className="glass-card rounded-2xl p-8 md:p-12 border border-white/10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { value: "50+", label: "Projects Delivered" },
+              { value: "98%", label: "Client Satisfaction" },
+              { value: "<2s", label: "Avg. Load Time" },
+              { value: "3x", label: "Conversion Lift" },
+            ].map((stat) => (
+              <div key={stat.label} className="text-center">
+                <div className="font-display text-3xl md:text-4xl font-bold text-primary mb-1">{stat.value}</div>
+                <div className="text-xs md:text-sm text-muted-foreground font-medium">{stat.label}</div>
+              </div>
             ))}
           </div>
-
-          {/* Stats bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-20 glass-card rounded-2xl p-8 md:p-12"
-          >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {[
-                { value: "50+", label: "Projects Delivered" },
-                { value: "98%", label: "Client Satisfaction" },
-                { value: "<2s", label: "Avg. Load Time" },
-                { value: "3x", label: "Conversion Lift" },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <div className="font-display text-3xl md:text-4xl font-bold text-primary mb-1">{stat.value}</div>
-                  <div className="text-xs md:text-sm text-muted-foreground font-medium">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>
