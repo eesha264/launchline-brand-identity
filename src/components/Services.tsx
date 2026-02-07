@@ -58,10 +58,10 @@ const Services = () => {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="group relative"
             >
-              <div className="glass-card rounded-2xl p-6 md:p-8 h-full hover:glow-accent transition-all duration-500 hover:-translate-y-1">
+              <div className="glass-card rounded-2xl p-6 md:p-8 h-full hover-glow transition-all duration-500 hover:-translate-y-1">
                 {/* Accent gradient top */}
                 <div className={`absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl bg-gradient-to-r ${service.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                
+
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors duration-300">
                   <service.icon size={24} className="text-primary" />
                 </div>
