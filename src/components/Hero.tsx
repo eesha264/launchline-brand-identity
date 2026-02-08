@@ -6,7 +6,8 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden section-padding pt-32 md:pt-40">
       {/* Background elements removed for cleaner look */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent opacity-30" />
+      <div className="absolute inset-0 bg-grid z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent opacity-30 z-0" />
 
       <div className="container mx-auto relative z-10">
         <div className="max-w-4xl mx-auto text-center">

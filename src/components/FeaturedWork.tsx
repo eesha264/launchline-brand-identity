@@ -59,27 +59,27 @@ const FeaturedWork = () => {
             const offset = i - centerIndex;
 
             // Dynamic transforms based on scroll
-            // Animation completes at 0.8 scroll progress to leave some dwell time
+            // Animation completes by 70% scroll progress so exit feels snappy
             const rotate = useTransform(
               scrollYProgress,
-              [0, 1],
-              [0, offset * 12] // Reduced rotation slightly for tighter look
+              [0, 0.8],
+              [0, offset * 12]
             );
 
             const x = useTransform(
               scrollYProgress,
-              [0, 1],
-              [0, offset * 200] // Reduced horizontal spread slightly
+              [0, 0.8],
+              [0, offset * 200]
             );
 
             const y = useTransform(
               scrollYProgress,
-              [0, 1],
-              [0, Math.abs(offset) * 30] // Arch effect
+              [0, 0.8],
+              [0, Math.abs(offset) * 30]
             );
 
             // Stacking Scale: start piled up, end uniform
-            const scale = useTransform(scrollYProgress, [0, 1], [1 - (projects.length - 1 - i) * 0.05, 1]);
+            const scale = useTransform(scrollYProgress, [0, 0.8], [1 - (projects.length - 1 - i) * 0.05, 1]);
 
             return (
               <motion.div
