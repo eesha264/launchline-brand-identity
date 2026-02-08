@@ -2,35 +2,42 @@
 
 **From idea to launch — faster.**
 
-Launchline is a web design and development agency focused on building
-high-performance, SEO-ready business websites and landing pages that convert.
+Launchline is a web design and development agency focused on building high-performance, SEO-ready business websites and landing pages that convert visitors into customers.
 
 ---
 
-## 🚀 Project Overview
+## What We Do
 
-This repository contains the source code for the Launchline website.
-
-We specialize in:
+We design and develop:
 - Business websites
 - Landing pages
-- Mobile-first, performance-optimized builds
-- SEO-ready production deployments
+- Mobile-first, performance-optimized web experiences
+
+Every project is built with clarity, speed, SEO, and conversion in mind.
 
 ---
 
-## 🛠 Tech Stack
+## Our Approach
 
-This project is built with:
-- Vite
-- TypeScript
+- Clean, modern UI/UX
+- Mobile-first development
+- SEO and performance optimization
+- Production-ready deployments
+- Clear calls-to-action for real business impact
+
+---
+
+## Tech Stack
+
 - React
+- TypeScript
+- Vite
 - Tailwind CSS
 - shadcn/ui
 
 ---
 
-## 🧑‍💻 Getting Started (Local Development)
+## Getting Started (Local Development)
 
 ### Prerequisites
 - Node.js
@@ -38,27 +45,8 @@ This project is built with:
 
 ### Installation
 
-# Clone the repository
+```sh
 git clone <YOUR_GIT_URL>
-
-# Navigate to the project directory
 cd <YOUR_PROJECT_NAME>
-
-# Install dependencies
 npm install
-
-# Start the development server
 npm run dev
-
-
-📄 License
-
-This project is proprietary and maintained by the Launchline team.
-
-
-## Final step (important)
-After saving the file, run:
-
-git add README.md
-git commit -m "Clean README and remove Lovable references"
-git push origin main
