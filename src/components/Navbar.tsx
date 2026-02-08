@@ -9,7 +9,11 @@ const navLinks = [
   { label: "Why Us", href: "#why" },
 ];
 
-const Navbar = () => {
+interface NavbarProps {
+  showLogo?: boolean;
+}
+
+const Navbar = ({ showLogo = true }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -28,9 +32,22 @@ const Navbar = () => {
         }`}
     >
       <div className="container mx-auto flex items-center justify-between h-16 md:h-20 px-4 md:px-8">
-        <a href="#" className="font-display text-xl md:text-2xl font-bold tracking-tight text-foreground">
-          Launch<span className="text-primary">line</span>
-        </a>
+
+        {/* Brand Logo with Shared Layout ID */}
+        <div className="relative z-50">
+          {showLogo ? (
+            <a href="#" className="font-display text-xl md:text-2xl font-bold tracking-tight text-foreground">
+              <motion.span layoutId="brand-text" className="inline-block">
+                Launch<span className="text-primary">line</span>
+              </motion.span>
+            </a>
+          ) : (
+            /* Invisible placeholder to keep layout stable */
+            <span className="font-display text-xl md:text-2xl font-bold tracking-tight opacity-0 pointer-events-none">
+              Launchline
+            </span>
+          )}
+        </div>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
@@ -90,5 +107,4 @@ const Navbar = () => {
     </motion.header>
   );
 };
-
 export default Navbar;
