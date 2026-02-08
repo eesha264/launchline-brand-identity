@@ -29,7 +29,7 @@ const CTASection = () => {
             ?
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed">
-            Let's build something fast, sharp, and unforgettable. 
+            Let's build something fast, sharp, and unforgettable.
             Your next website is one conversation away.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -38,7 +38,7 @@ const CTASection = () => {
               <ArrowRight className="ml-2" size={18} />
             </Button>
             <Button variant="hero-outline" size="lg" className="text-base px-8 py-6">
-              Book a Call
+              Book Now
             </Button>
           </div>
         </motion.div>
